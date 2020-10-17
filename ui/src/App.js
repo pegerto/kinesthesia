@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,19 +11,12 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import BarMenu from './Bar'
-import Title from './components/Title'
+import BarMenu from './components/Bar'
+import Dashboard from "./components/Dashboard"
 
 function Copyright() {
   return (
@@ -40,7 +33,7 @@ function Copyright() {
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -128,16 +121,6 @@ const App = () => {
     const handleDrawerClose = () => {
       setOpen(false);
     };
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    const [status, setStatus] = useState([]);
-    useEffect(() => {
-      fetch('/v1/status')
-        .then(res => res.json())
-        .then(
-          (result) => {setStatus(result)},
-          (error) => {console.log(error)}
-        )
-    },[])
 
     return (
       <div className={classes.root}>
@@ -187,50 +170,9 @@ const App = () => {
   
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} lg={6}>
-                <Paper className={fixedHeightPaper}>
-                  <Title>Cluster ID</Title>
-                    <Typography component="p">
-                      {status.clusterId}
-                    </Typography>
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={6} lg={6}>
-                <Paper className={fixedHeightPaper}>
-                <Title>Node Count</Title>
-                    <Typography component="p">
-                      {status.nodeCount}
-                    </Typography>
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Title>Cluster Nodes</Title>
-                <Table size="small">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Id</TableCell>
-                      <TableCell>Host</TableCell>
-                      <TableCell align="right">Rack</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-  
-                    {status.nodes && status.nodes.map((node) => (
-                      <TableRow key={node.id}>
-                        <TableCell>{node.id}</TableCell>
-                        <TableCell>{node.host}:{node.port}</TableCell>
-                        <TableCell align="right">{node.rack}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Paper>
-            </Grid>
-            </Grid>
-            <Box pt={4}>
+          <Container  maxWidth="lg" className={classes.container}>
+           <Dashboard/>
+           <Box pt={4}>
               <Copyright />
             </Box>
           </Container>
