@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,6 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import BarMenu from './components/Bar'
 import Dashboard from "./components/Dashboard"
+import Topic from './components/Topic';
 
 function Copyright() {
   return (
@@ -171,7 +173,11 @@ const App = () => {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Container  maxWidth="lg" className={classes.container}>
-           <Dashboard/>
+          <Switch>
+                <Route path="/" component={Dashboard}  exact/>
+                <Route path="/topics" component={Topic} exact/>
+                <Route component={Error}/>
+          </Switch>
            <Box pt={4}>
               <Copyright />
             </Box>
