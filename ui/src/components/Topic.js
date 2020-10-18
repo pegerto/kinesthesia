@@ -19,7 +19,6 @@ import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 import {useStyles} from '../App'
 import Title from './Title'
-import Directives._
 
 const Topic = () => {
     const classes = useStyles();
@@ -133,6 +132,7 @@ const Topic = () => {
                             <TableCell>Name</TableCell>
                             <TableCell>Partitions</TableCell>
                             <TableCell>Replication Factor</TableCell>
+                            <TableCell>Under replicated</TableCell>
                             <TableCell align="right">Actions</TableCell>
                             </TableRow>
                         </TableHead>
@@ -142,6 +142,7 @@ const Topic = () => {
                                 <TableCell>{topic.name}</TableCell>
                                 <TableCell>{topic.partitionNumber}</TableCell>
                                 <TableCell>{topic.replicationFactor}</TableCell>
+                                <TableCell>{topic.underReplicatedPartitions}</TableCell>
                                 <TableCell align="right">N/A</TableCell>
                             </TableRow>
                             ))}
@@ -184,7 +185,7 @@ const Topic = () => {
                     <InputLabel style={labelStyle}>Replication Factor</InputLabel>
                        
                     <Slider
-                        defaultValue={3}
+                        defaultValue={1}
                         aria-labelledby="discrete-slider-restrict"
                         step={null}
                         id="replicationFactor"

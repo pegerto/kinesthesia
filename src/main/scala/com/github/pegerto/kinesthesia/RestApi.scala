@@ -43,6 +43,13 @@ object RestApi {
   case object Topic extends SprayJsonSupport with DefaultJsonProtocol {
     implicit val topicFormat = jsonFormat3(Topic.apply)
   }
+  case class TopicStatus(name: String,
+                         partitionNumber: Int,
+                         replicationFactor: Int,
+                         underReplicatedPartitions: Int)
+  case object TopicStatus extends SprayJsonSupport with DefaultJsonProtocol {
+    implicit val topicStatusFormat = jsonFormat4(TopicStatus.apply)
+  }
 
   val api = pathPrefix("v1") {
     concat(
@@ -73,9 +80,15 @@ object RestApi {
                 topicNames <- client.listTopics().names().asScala()
                 topics <- client.describeTopics(topicNames).all().asScala()
               } yield topics.values().asScala.map(
-                t => Topic(t.name(),
-                  Some(t.partitions().size()),
-                  Some(t.partitions().get(0).replicas().size())))
+                t => {
+                  val numPartitions = t.partitions().size()
+                  val numReplicas = t.partitions().get(0).replicas().size()
+                  val numInSync = t.partitions().asScala.map(_.isr().size()).sum
+                  TopicStatus(t.name(),
+                    numPartitions,
+                    numReplicas,
+                    (numPartitions * numReplicas) - numInSync)
+                })
 
             complete(topics)}
         )
