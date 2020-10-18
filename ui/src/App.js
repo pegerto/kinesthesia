@@ -112,6 +112,11 @@ export const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 100,
   },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
 }));
 
 const App = () => {
@@ -139,7 +144,6 @@ const App = () => {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={0} color="secondary">
