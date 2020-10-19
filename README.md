@@ -24,3 +24,11 @@ docker run -p 8080:8080 -e BROKER_LIST="kafka:9092" -d pegerto/kinesthesia:lates
 2. Do your stuff: [ui](http://localhost:8080)
 
 ![Screenshot 2020-10-20 at 00 04 36](https://user-images.githubusercontent.com/261659/96520859-e3efb100-1267-11eb-9b3a-21ad368f8752.png)
+
+# :alien: Features
+
+- Cluster overview
+- Topic management
+- Under replication partition count
+
+This project is under active development
