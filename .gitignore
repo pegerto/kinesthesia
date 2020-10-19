@@ -1,4 +1,5 @@
 .bsp/
+.vscode
 .idea/
 target/
 src/main/resources/admin/

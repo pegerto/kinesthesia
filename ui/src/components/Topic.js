@@ -78,19 +78,20 @@ const Topic = () => {
       ];
 
     const [topics, setTopics] = useState([]);
-      useEffect(() => {
-        fetch('/v1/topics')
+    const loadTopics = () => {
+      fetch('/v1/topics')
           .then(res => res.json())
           .then(
             (result) => {setTopics(result)},
             (error) => {console.log(error)}
           )
-      },[])
+      }
+
+    useEffect(refreshTopics,[])
     
     const handleClose = () => {
         setOpen(false);
       };
-
     const [createTopic, updateCreateTopic] = React.useState([]);
     const handleCreateTopicChange = (e) => {
         updateCreateTopic({
@@ -105,21 +106,23 @@ const Topic = () => {
         });
       };   
     const handleCreateTopic = () => {
-        fetch('/v1/topics', {
-            method: 'POST',
-            headers: { 
-                     'Accept': 'application/json',
-                     'Content-Type': 'application/json' 
-                     },
-            body: JSON.stringify({
-                name: createTopic.name,
-                partitionNumber: createTopic.partitionNumber || 1,
-                replicationFactor: createTopic.replicationFactor || 1
-            })
-          })
-          .then(setOpen(false))
-          .catch((err) => { console.log(err); });
-    }
+      const item = {
+        name: createTopic.name,
+        partitionNumber: createTopic.partitionNumber || 1,
+        replicationFactor: createTopic.replicationFactor || 1
+      }
+      fetch('/v1/topics', {
+          method: 'POST',
+          headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                    },
+          body: JSON.stringify(item)
+        })
+        .then(setOpen(false))
+        .then(setTopics([...topics, item]))
+        .catch((err) => { console.log(err); });
+  }
 
     return (
         <Grid container spacing={3}>
