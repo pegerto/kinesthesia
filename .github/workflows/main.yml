@@ -25,7 +25,7 @@ jobs:
           mkdir src/main/resources/admin/
           cp -r ui/build/* src/main/resources/admin/
           sbt 'docker:stage'
-          sbt 'release with-defaults'
+          #sbt 'release with-defaults'
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
