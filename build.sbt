@@ -1,6 +1,7 @@
 name := "kinesthesia"
 
 version := "0.1"
+publish / skip := true
 
 scalaVersion := "2.13.3"
 val AkkaVersion = "2.6.8"
