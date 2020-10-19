@@ -1,7 +1,7 @@
 
-<div style="diplay: block;margin-left: auto;margin-right: auto;width: 50%;">
+<p align="center">
   <img src="https://user-images.githubusercontent.com/261659/96519293-8e65d500-1264-11eb-831f-8750eb1977df.png" alt="Kinesthesia">
-</div> 
+<p>
 
 Kinesthesia simplify the operational complexity of managing a Kafka cluster. 
 
