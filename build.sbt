@@ -1,10 +1,13 @@
 name := "kinesthesia"
 
-publish / skip := true
-
 scalaVersion := "2.13.3"
 val AkkaVersion = "2.6.8"
 val AkkaHttpVersion = "10.2.1"
+
+publish / skip := true
+enablePlugins(sbtdocker.DockerPlugin, JavaAppPackaging)
+dockerExposedPorts ++= Seq(8080)
+
 libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.4.0",
   "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
