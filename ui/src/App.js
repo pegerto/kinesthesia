@@ -110,7 +110,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 100,
+    height: 110,
   },
   fab: {
     position: 'absolute',

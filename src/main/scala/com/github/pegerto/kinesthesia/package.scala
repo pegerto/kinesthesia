@@ -9,9 +9,9 @@ package object kinesthesia {
     implicit val nodeFormat = jsonFormat4(Node.apply)
   }
 
-  case class Status(clusterId: String, nodeCount: Int, nodes: List[Node])
+  case class Status(clusterId: String, nodeCount: Int, nodes: List[Node], topicCount: Int, clientCount: Int)
   case object Status extends SprayJsonSupport with DefaultJsonProtocol {
-    implicit val statusFormat = jsonFormat3(Status.apply)
+    implicit val statusFormat = jsonFormat5(Status.apply)
   }
 
   case class Topic(name: String, partitionNumber: Option[Int], replicationFactor: Option[Int])

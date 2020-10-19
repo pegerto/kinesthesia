@@ -87,7 +87,7 @@ const Topic = () => {
           )
       }
 
-    useEffect(refreshTopics,[])
+    useEffect(loadTopics,[])
     
     const handleClose = () => {
         setOpen(false);

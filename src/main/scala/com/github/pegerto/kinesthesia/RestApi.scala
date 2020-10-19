@@ -31,9 +31,13 @@ object RestApi {
           val status = for {
             clusterId <- client.describeCluster().clusterId().asScala()
             nodes <- client.describeCluster().nodes().asScala()
+            topics <- client.listTopics().names().asScala()
+            clients <- client.listConsumerGroups().all().asScala()
           } yield  Status(clusterId,
             nodes.size(),
-            nodes.asScala.map(n => Node(n.id(), n.host(), n.port(), Option(n.rack()))).toList)
+            nodes.asScala.map(n => Node(n.id(), n.host(), n.port(), Option(n.rack()))).toList,
+            topics.size(),
+            clients.size())
           complete(status)
         }
       },
