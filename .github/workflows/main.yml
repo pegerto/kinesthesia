@@ -41,4 +41,4 @@ jobs:
           context: ./target/docker/stage/
           file: ./target/docker/stage/Dockerfile
           push: true
-          tags: pegerto/kinestesia:latest
+          tags: pegerto/kinesthesia:latest
