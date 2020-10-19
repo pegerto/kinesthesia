@@ -10,7 +10,7 @@ import scala.concurrent.duration.Duration
 object Main extends App {
   implicit val system = ActorSystem("kinesthesia")
 
-  val bindingFuture = Http().newServerAt("localhost", 8080)
+  val bindingFuture = Http().newServerAt("0.0.0.0", 8080)
     .bind(concat(RestApi.api, RestApi.staticResources))
 
   Await.result(bindingFuture, Duration.Inf)
