@@ -1,15 +1,11 @@
 package com.github.pegerto.kinesthesia
 
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import akka.http.scaladsl.model.{HttpEntity, HttpResponse, StatusCodes}
+import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
-import org.apache.kafka.clients.admin.{AdminClient, NewTopic}
-import spray.json.DefaultJsonProtocol
+import org.apache.kafka.clients.admin.NewTopic
 
-import scala.concurrent.Future
 import scala.jdk.CollectionConverters._
 import scala.jdk.OptionConverters._
-import scala.util.Success
 
 object RestApi {
 
@@ -17,8 +13,7 @@ object RestApi {
   import Main._
 
   implicit val executionContext = system.dispatcher
-  val client = AdminClient.create(Map[String, Object](
-    "bootstrap.servers" -> "localhost:9093").asJava)
+  val client = getAdminClient()
 
   val staticResources =
     (get & pathPrefix("admin")){
@@ -28,28 +23,6 @@ object RestApi {
         getFromResourceDirectory("admin")
       }
     }
-
-  case class Node(id: Int, host: String, port: Int, rack: Option[String])
-  case object Node extends SprayJsonSupport with DefaultJsonProtocol {
-    implicit val nodeFormat = jsonFormat4(Node.apply)
-  }
-
-  case class Status(clusterId: String, nodeCount: Int, nodes: List[Node])
-  case object Status extends SprayJsonSupport with DefaultJsonProtocol {
-    implicit val statusFormat = jsonFormat3(Status.apply)
-  }
-
-  case class Topic(name: String, partitionNumber: Option[Int], replicationFactor: Option[Int])
-  case object Topic extends SprayJsonSupport with DefaultJsonProtocol {
-    implicit val topicFormat = jsonFormat3(Topic.apply)
-  }
-  case class TopicStatus(name: String,
-                         partitionNumber: Int,
-                         replicationFactor: Int,
-                         underReplicatedPartitions: Int)
-  case object TopicStatus extends SprayJsonSupport with DefaultJsonProtocol {
-    implicit val topicStatusFormat = jsonFormat4(TopicStatus.apply)
-  }
 
   val api = pathPrefix("v1") {
     concat(
