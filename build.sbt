@@ -1,6 +1,5 @@
 name := "kinesthesia"
 
-version := "0.1"
 publish / skip := true
 
 scalaVersion := "2.13.3"
