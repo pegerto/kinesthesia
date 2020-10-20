@@ -19,6 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import BarMenu from './components/Bar'
 import Dashboard from "./components/Dashboard"
 import Topic from './components/Topic';
+import Partition from './components/Partition';
 
 function Copyright() {
   return (
@@ -180,6 +181,7 @@ const App = () => {
           <Switch>
                 <Route path="/" component={Dashboard}  exact/>
                 <Route path="/topics" component={Topic} exact/>
+                <Route path="/partitions" component={Partition} exact/>
                 <Route component={Error}/>
           </Switch>
            <Box pt={4}>

@@ -6,7 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import StorageIcon from '@material-ui/icons/Storage';
-
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
 export default function BarMenu() {
     const history = useHistory()
@@ -24,6 +24,12 @@ export default function BarMenu() {
                         <StorageIcon />
                     </ListItemIcon>
                     <ListItemText primary="Topics" />
+                </ListItem>
+                <ListItem button onClick={() => history.push('/partitions')}>
+                    <ListItemIcon>
+                        <AccountTreeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Partitions" />
                 </ListItem>
             </List>
         </div>

@@ -1,7 +1,7 @@
 package com.github.pegerto
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import spray.json.DefaultJsonProtocol
+import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 
 package object kinesthesia {
   case class Node(id: Int, host: String, port: Int, rack: Option[String])
@@ -26,4 +26,12 @@ package object kinesthesia {
     implicit val topicStatusFormat = jsonFormat4(TopicStatus.apply)
   }
 
+
+  case class ReplicaStatus(topic: String,
+                         partitionNumber: Int,
+                         leader: Boolean,
+                         underReplicated: Boolean)
+  case object ReplicaStatus extends SprayJsonSupport with DefaultJsonProtocol {
+    implicit val replicaStatus = jsonFormat4(ReplicaStatus.apply)
+  }
 }
