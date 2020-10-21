@@ -7,7 +7,7 @@
 Kinesthesia simplify the operational complexity of managing a Kafka cluster 
 <p> 
   
-Kinesthesia, is the sense that lets us perceive the location, movement, and action of parts of the body. This term define the main goal of this project  that allow the user to percive and sense the actions on the cluster simplifying the operations.
+Kinesthesia, is the sense that lets us perceive the location, movement, and action of parts of the body. This term define the main goal of this project  that allow the user to percive and sense data availability and movement in Apache Kafka.
 
 
 # 🚀 Install
