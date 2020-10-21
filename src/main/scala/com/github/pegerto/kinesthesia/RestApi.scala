@@ -6,7 +6,6 @@ import akka.http.scaladsl.server.Directives._
 import org.apache.kafka.clients.admin.{NewTopic, TopicDescription}
 import spray.json.DefaultJsonProtocol._
 
-import scala.concurrent.Future
 import scala.jdk.CollectionConverters._
 import scala.jdk.OptionConverters._
 
